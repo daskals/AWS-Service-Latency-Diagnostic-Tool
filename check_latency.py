@@ -171,7 +171,7 @@ def write_report(iot_latencies, api_gateway_latencies):
 
 if __name__ == "__main__":
     print("Please Wait...")
-    iteration_var = 5
+    iteration_var = 10
     # Calculate total iterations based on regions and the functions used
     total_regions = len(region_data)  # Dynamically get the number of regions
     # Functions one for IoT Core and One for Gateway API
@@ -191,5 +191,4 @@ if __name__ == "__main__":
     print("------------------------------------")
     for (region_name, region_code), latency in api_gateway_latencies:
         print(f"{region_name} ({region_code}): {latency if isinstance(latency, str) else f'{latency:.4f} seconds'}")
-
     write_report(iot_latencies, api_gateway_latencies)

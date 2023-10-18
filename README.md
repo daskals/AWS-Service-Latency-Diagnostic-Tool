@@ -7,20 +7,12 @@ This script is designed to measure the latency of two AWS services - AWS IoT Cor
 
 ### Reporting Procedure:
 
-Upon execution, the script now also creates a report, encapsulating all vital statistics and results. This report includes:
-- Author
-- Python version
-- Location of the requests
-- Date of the script execution
-- Latency results for AWS IoT Core and AWS API Gateway across different regions.
-
+Upon execution, the script now also creates a report, encapsulating all vital statistics and results.
 This makes it easy to archive, share, or analyze results without having to rerun the script.
 
 ### Executable for Windows:
 
-For users who don't have Python installed on their Windows machine, an executable file (`.exe`) is provided. Simply download the file and run it like any other Windows application to get the latency diagnostics.
-
-It will create a report file with name aws_latency_report.txt
+For users who don't have Python installed on their Windows machine, an executable file (`.exe`) is provided. Simply download the file and run it like any other Windows application to get the latency diagnostics. It will create a report file with name aws_latency_report.txt
 
 ### Key Components and Functionalities:
 
@@ -47,49 +39,51 @@ The below output is a result of running the script from Edinburgh:
 
 ```
 ...
-API Gateway Iteration 9 for eu-north-1: 0.0849 seconds. Total Remaining iterations: 1
-API Gateway Iteration 10 for eu-north-1: 0.0820 seconds. Total Remaining iterations: 0
+API Gateway Iteration 9 for eu-north-1: 0.0956 seconds. Total Remaining iterations: 1
+API Gateway Iteration 10 for eu-north-1: 0.0862 seconds. Total Remaining iterations: 0
 ------------------------------------
 Latencies for AWS IoT Core:
 ------------------------------------
-Europe (London) (eu-west-2): 0.0309 seconds
-Europe (Paris) (eu-west-3): 0.0378 seconds
-Europe (Frankfurt) (eu-central-1): 0.0428 seconds
-Europe (Ireland) (eu-west-1): 0.0496 seconds
-Europe (Stockholm) (eu-north-1): 0.0674 seconds
-Canada (Central) (ca-central-1): 0.1209 seconds
-US East (Ohio) (us-east-2): 0.1289 seconds
-US East (N. Virginia) (us-east-1): 0.1398 seconds
-US West (N. California) (us-west-1): 0.1979 seconds
-US West (Oregon) (us-west-2): 0.2094 seconds
-Asia Pacific (Singapore) (ap-southeast-1): 0.2252 seconds
-Asia Pacific (Mumbai) (ap-south-1): 0.2371 seconds
-Asia Pacific (Tokyo) (ap-northeast-1): 0.3076 seconds
-Asia Pacific (Seoul) (ap-northeast-2): 0.3292 seconds
-Asia Pacific (Sydney) (ap-southeast-2): 0.3404 seconds
+Europe (London) (eu-west-2): 0.0455 seconds
+Europe (Paris) (eu-west-3): 0.0525 seconds
+Europe (Frankfurt) (eu-central-1): 0.0557 seconds
+Europe (Ireland) (eu-west-1): 0.0583 seconds
+Europe (Stockholm) (eu-north-1): 0.0819 seconds
+Canada (Central) (ca-central-1): 0.1506 seconds
+US East (N. Virginia) (us-east-1): 0.1562 seconds
+US East (Ohio) (us-east-2): 0.1569 seconds
+Asia Pacific (Singapore) (ap-southeast-1): 0.2214 seconds
+US West (N. California) (us-west-1): 0.2246 seconds
+Asia Pacific (Mumbai) (ap-south-1): 0.2412 seconds
+US West (Oregon) (us-west-2): 0.2509 seconds
+Asia Pacific (Tokyo) (ap-northeast-1): 0.3098 seconds
+Asia Pacific (Seoul) (ap-northeast-2): 0.3653 seconds
+Asia Pacific (Sydney) (ap-southeast-2): 0.3872 seconds
 Asia Pacific (Osaka) (ap-northeast-3): Not supported
 ------------------------------------
 
 Latencies for AWS API Gateway:
 ------------------------------------
-Europe (London) (eu-west-2): 0.0611 seconds
-Europe (Paris) (eu-west-3): 0.0622 seconds
-Europe (Ireland) (eu-west-1): 0.0631 seconds
-Europe (Frankfurt) (eu-central-1): 0.0700 seconds
-Europe (Stockholm) (eu-north-1): 0.0979 seconds
-Canada (Central) (ca-central-1): 0.1429 seconds
-US East (N. Virginia) (us-east-1): 0.1477 seconds
-US East (Ohio) (us-east-2): 0.1505 seconds
-US West (Oregon) (us-west-2): 0.2191 seconds
-US West (N. California) (us-west-1): 0.2243 seconds
-Asia Pacific (Mumbai) (ap-south-1): 0.2601 seconds
-Asia Pacific (Singapore) (ap-southeast-1): 0.3195 seconds
-Asia Pacific (Osaka) (ap-northeast-3): 0.3255 seconds
-Asia Pacific (Seoul) (ap-northeast-2): 0.3328 seconds
-Asia Pacific (Tokyo) (ap-northeast-1): 0.3337 seconds
-Asia Pacific (Sydney) (ap-southeast-2): 0.3587 seconds
+Europe (London) (eu-west-2): 0.0705 seconds
+Europe (Ireland) (eu-west-1): 0.0709 seconds
+Europe (Paris) (eu-west-3): 0.0750 seconds
+Europe (Frankfurt) (eu-central-1): 0.0786 seconds
+Europe (Stockholm) (eu-north-1): 0.1121 seconds
+Canada (Central) (ca-central-1): 0.1717 seconds
+US East (N. Virginia) (us-east-1): 0.1728 seconds
+US East (Ohio) (us-east-2): 0.1819 seconds
+US West (N. California) (us-west-1): 0.2462 seconds
+Asia Pacific (Singapore) (ap-southeast-1): 0.2500 seconds
+US West (Oregon) (us-west-2): 0.2629 seconds
+Asia Pacific (Mumbai) (ap-south-1): 0.2779 seconds
+Asia Pacific (Osaka) (ap-northeast-3): 0.3400 seconds
+Asia Pacific (Tokyo) (ap-northeast-1): 0.3477 seconds
+Asia Pacific (Seoul) (ap-northeast-2): 0.3750 seconds
+Asia Pacific (Sydney) (ap-southeast-2): 0.4136 seconds
+Report generated and saved as 'report.txt'.
 
 Process finished with exit code 0
+
 ```
 
 
