@@ -5,6 +5,23 @@ Python tool for diagnosing AWS IoT Core &amp; API Gateway latencies across AWS r
 
 This script is designed to measure the latency of two AWS services - AWS IoT Core and AWS API Gateway - across multiple AWS regions. By sending requests to these services and gauging the response time, it provides insights into their respective performances.
 
+### Reporting Procedure:
+
+Upon execution, the script now also creates a report, encapsulating all vital statistics and results. This report includes:
+- Author
+- Python version
+- Location of the requests
+- Date of the script execution
+- Latency results for AWS IoT Core and AWS API Gateway across different regions.
+
+This makes it easy to archive, share, or analyze results without having to rerun the script.
+
+### Executable for Windows:
+
+For users who don't have Python installed on their Windows machine, an executable file (`.exe`) is provided. Simply download the file and run it like any other Windows application to get the latency diagnostics.
+
+It will create a report file with name aws_latency_report.txt
+
 ### Key Components and Functionalities:
 
 #### 1. **Region Data**:

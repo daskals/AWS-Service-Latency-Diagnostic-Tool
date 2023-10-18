@@ -12,7 +12,9 @@
 
 import boto3
 import time
-
+import requests
+import datetime
+import sys
 
 # Define a global variable to hold the total iterations count
 total_remaining_iterations = 0
@@ -69,6 +71,7 @@ def check_latency_iot(region_code, num_iterations=5):
                 latencies.append(float('inf'))
     return sum(latencies) / len(latencies)
 
+
 # Similar function to the above but for the API Gateway service
 def check_latency_api_gateway(region_code, num_iterations=5):
     global total_remaining_iterations
@@ -108,9 +111,67 @@ def get_all_region_latencies(service_check_function):
     return sorted(latencies.items(), key=lambda x: (isinstance(x[1], str), x[1]))
 
 
+def get_ip():
+    response = requests.get('https://api64.ipify.org?format=json').json()
+    return response["ip"]
+
+
+def get_location():
+    ip_address = get_ip()
+    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
+    location_data = {
+        "ip": ip_address,
+        "city": response.get("city"),
+        "region": response.get("region"),
+        "country": response.get("country_name")
+    }
+    return location_data
+
+
+
+def write_report(iot_latencies, api_gateway_latencies):
+    current_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    location_data = get_location()
+    formatted_location = f"{location_data['city']}, {location_data['region']}, {location_data['country']}"
+    python_version = sys.version  # You can use sys.version for actual version
+
+    with open("aws_latency_report.txt", "w") as report:
+        # Title and metadata
+        report.write("AWS Services Latency Report\n")
+        report.write("====================================\n")
+        report.write(f"Author: Spiros Daskalakis\n")
+        report.write(f"Date: {current_date}\n")
+        report.write(f"Location of requests: {formatted_location}\n")
+        report.write(f"Python Version: {python_version}\n\n")
+
+        # Explanation
+        report.write(
+            "This report provides latency measurements for AWS IoT Core and AWS API Gateway across various AWS regions.\n")
+        report.write(
+            "For each region, the average latency over multiple requests is provided. \nIf a service is not supported "
+            "in a specific region, it's mentioned as 'Not supported'.\n\n")
+
+        # IoT Core Latencies
+        report.write("Latencies for AWS IoT Core:\n")
+        report.write("------------------------------------\n")
+        for (region_name, region_code), latency in iot_latencies:
+            report.write(
+                f"{region_name} ({region_code}): {latency if isinstance(latency, str) else f'{latency:.4f} seconds'}\n")
+        report.write("\n")
+
+        # API Gateway Latencies
+        report.write("Latencies for AWS API Gateway:\n")
+        report.write("------------------------------------\n")
+        for (region_name, region_code), latency in api_gateway_latencies:
+            report.write(
+                f"{region_name} ({region_code}): {latency if isinstance(latency, str) else f'{latency:.4f} seconds'}\n")
+
+        print("Report generated and saved as 'report.txt'.")
+
+
 if __name__ == "__main__":
     print("Please Wait...")
-    iteration_var = 10
+    iteration_var = 5
     # Calculate total iterations based on regions and the functions used
     total_regions = len(region_data)  # Dynamically get the number of regions
     # Functions one for IoT Core and One for Gateway API
@@ -118,7 +179,7 @@ if __name__ == "__main__":
     total_remaining_iterations = total_regions * iteration_var * num_functions_running
     # Obtain latencies for each service
     iot_latencies = get_all_region_latencies(lambda x: check_latency_iot(x, iteration_var))
-    api_gateway_latencies = get_all_region_latencies(lambda x: check_latency_api_gateway(x, iteration_var))#
+    api_gateway_latencies = get_all_region_latencies(lambda x: check_latency_api_gateway(x, iteration_var))  #
 
     print("------------------------------------")
     print("Latencies for AWS IoT Core:")
@@ -130,3 +191,5 @@ if __name__ == "__main__":
     print("------------------------------------")
     for (region_name, region_code), latency in api_gateway_latencies:
         print(f"{region_name} ({region_code}): {latency if isinstance(latency, str) else f'{latency:.4f} seconds'}")
+
+    write_report(iot_latencies, api_gateway_latencies)
